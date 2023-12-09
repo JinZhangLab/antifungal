@@ -1,0 +1,4 @@
+include antifungal/propy/data/*.json
+include antifungal/models/*.pkl
+
+recursive-exclude antifungal/__pycache__ *

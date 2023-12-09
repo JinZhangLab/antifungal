@@ -1,0 +1,2 @@
+antifungal/models/cmodel.pkl filter=lfs diff=lfs merge=lfs -text
+antifungal/models/rmodel_C_a.pkl filter=lfs diff=lfs merge=lfs -text

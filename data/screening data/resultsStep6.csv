@@ -1,0 +1,4 @@
+Id,Sequence,Is Antifungal,Probability Is Antifungal,Activity C. albicans,Probability C. albicans,Activity C. krusei,Probability C. krusei,Activity C. neoformans,Probability C. neoformans,Activity C. parapsilosis,Probability C. parapsilosis,Antifungal Index,Probability Antifungal Index
+sp|P18252|TAC3_TACGI,KWCFRVCYRGICYRKCR,1,1,1.41,0.991,4.25,0.95,0.2,0.634,16.79,0.974,2.11,0.581
+sp|P14215|PPM1_LIMPO,RRWCFRVCYRGFCYRKCR,1,1,1.07,0.992,5.22,0.966,0.22,0.727,20.9,0.994,2.25,0.692
+sp|P69135|TAC1_TACGI,KWCFRVCYRGICYRRCR,1,1,1.87,0.991,5.22,0.954,0.17,0.56,18.25,0.978,2.34,0.518
