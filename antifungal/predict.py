@@ -177,5 +177,3 @@ if __name__ == "__main__":
    pred = predict_MIC(seq)
    print(pred)
    
-   pred = predict_MIC('HIHIRHMWLLRR')
-   print(pred)

@@ -2,12 +2,12 @@ from setuptools import setup, find_packages
 
 setup(
     name='antifungal',
-    version='0.1.2',
+    version='0.1.3',
     packages=find_packages(), 
     include_package_data=True, 
     author='Jin Zhang',
     author_email='jzhang@chemoinfolab.com',
-    description='A python package for activity prediction and design of antifungal peitdes.',
+    description='A python package for activity prediction and in rational design of antifungal peitdes.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/JinZhangLab/antifungal',
@@ -16,8 +16,10 @@ setup(
         'pandas>=1.2.4',
         'modlamp>=4.3.0',
         'scipy<=1.7.0',
-        'tqdm',
         'scikit-learn==0.24.2',
+        'tqdm',
+        'matplotlib',
+        'seaborn',
     ],
     classifiers=[
         'License :: OSI Approved :: MIT License',
