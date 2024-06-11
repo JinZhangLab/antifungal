@@ -69,6 +69,7 @@ We categorize the rational design of antifungal peptides into three types based 
   - **Single Point Mutation**: Replaces individual amino acids with other amino acids.
   - **Swap**: Swaps positions of adjacent amino acids within the sequence.
   - **Shift**: Shifts the entire sequence to the left or right by specified offsets.
+  - **Multi-Point Mutation**: Simutaneously mutate multiple amino acids at the specified positions, with a maximum limit of four simultaneous mutations.
   - **Global Optimize**: Optimizes the peptide sequence by performing multiple amino acid mutations simultaneously.
 
 3. **Sequence Length Reducing Methods**
@@ -103,6 +104,33 @@ print(segment_predictions)
 # }
 ```
 
+**Multi-Point Mutation**
+```python
+# Demonstrative usage of multi-point mutation method
+from antifungal.design import multi_point_mutation
+mpm_instance = multi_point_mutation("HIHIRHMWLLRRR")
+mpm_instance.get_candidate_sequences(positions=[6，7])
+mpm_predictions = mpm_instance.predict()
+print(mpm_predictions)
+# Expected output: 
+# {
+#     'antifungal': [True, ...],
+#     'prob_antifungal': [95.2, ...],
+#     'MIC_C_albicans': [21.8, ...],
+#     'prob_MIC_C_albicans': [99.8, ...],
+#     'MIC_C_krusei': [7.13, ...],
+#     'prob_MIC_C_krusei': [99.3, ...],
+#     'MIC_C_neoformans': [24.4, ...],
+#     'prob_MIC_C_neoformans': [99.3, ...],
+#     'MIC_C_parapsilosis': [18.3, ...],
+#     'prob_MIC_C_parapsilosis': [84.5, ...],
+#     'AFI': [16.23,  ...],
+#     'prob_AFI': [79.16, ...],
+#     'peptide_seq': [HIHIRYYWLLRRR, ...],
+#     'seq_name': [mutate_H_6_Y_mutate_M_7_Y, ...]
+# }
+```
+
 **Globally optimize**  
 The globally_optimize class is a length-preserving globall optimization method that utilizes an evolutionary algorithm to perform multiple amino acid mutations simultaneously, enabling the improvement of antifungal activity of peptides.
 ```python
@@ -117,6 +145,9 @@ print(results)
 #     "antifungal_idx": [3.96]
 # }
 ```
+
+### Contribution analysis to Antifungal activity 
+Coming soon.
 
 ## Directory Structure
 - **data/**: Contains data used for model development.

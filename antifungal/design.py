@@ -1,12 +1,9 @@
 # antifungal/design.py
 import numpy as np
-import random
-import pandas as pd
 from .predict import predict_MIC
-from .ChemoinfoPy.ProteinTools import calc_Pro_Des_values, calc_Pro_Des
 from modlamp.descriptors import GlobalDescriptor
 from scipy.optimize import minimize, NonlinearConstraint
-
+from itertools import product
 
 # Design antifungal peptide by methods that preserve the sequence length, includinging single point muation, swap, shift and globally optimize. 
 class single_point_mutate():
@@ -75,6 +72,57 @@ class single_point_mutate():
         predictions = predict_MIC(self.candidate_sequences)
         predictions["seq_name"] = self.seq_name
         return predictions
+
+class multi_point_mutate(single_point_mutate):
+    """
+    A class for generating and predicting the antifungal activity of all sequences with exhaustive multi-point mutations according to the provided mutation postions.
+
+    Attributes:
+        standard_AA (list): List of standard amino acids.
+        original_sequence (str): The original peptide sequence.
+        original_sequence_activity (DataFrame): Predicted antifungal activity of the original sequence.
+        candidate_sequences (list): List of all possible mutated sequences.
+        seq_name (list): List of names assigned to each mutated sequence, with the format 'mutate_
+
+    Methods:
+        get_candidate_sequences(): Generates all possible multi-point mutations of the sequence.
+        predict(): Predicts the antifungal activity of all mutated sequences.
+    """
+
+    def get_candidate_sequences(self, positions = [1, 2]):
+        """
+        Generates all possible multi-point mutated sequences through mutations at the specified positions of the original sequence.
+
+        Args:
+            positions (list): List of positions to mutate in the sequence, should be larger than 1 and no larger than 4 positions.
+
+        Returns:
+            self: The instance itself with updated 'candidate_sequences' and 'seq_name' attributes.
+        """
+        if len(positions) < 1 or len(positions) > 4:
+            raise ValueError("The number of positions to mutate should be between 1 and 4.")
+
+        sequence_length = len(self.original_sequence)
+        if any(pos < 1 or pos > sequence_length for pos in positions):
+            raise ValueError(f"Positions should be within the range of the sequence length (1 to {sequence_length}).")
+
+        candidate_sequences = []
+        seq_name = []
+
+        for mutations in product(self.standard_AA, repeat=len(positions)):
+            mut_seq = list(self.original_sequence)
+            name_parts = []
+            for pos, new_aa in zip(positions, mutations):
+                name_parts.append(f"mutate_{mut_seq[pos-1]}_{pos}_{new_aa}")
+                mut_seq[pos-1] = new_aa
+            candidate_sequences.append("".join(mut_seq))
+            seq_name.append("_".join(name_parts))
+
+        self.candidate_sequences = candidate_sequences
+        self.seq_name = seq_name
+        return self
+
+
 
 
 class swap(single_point_mutate):
@@ -352,6 +400,7 @@ class duplicate(single_point_mutate):
         self.candidate_sequences = candidate_sequences
         self.seq_name = seq_name
         return self
+
 
 
 # Evolutionary algorithm based antifungal peptide design method, characterized by the simutaneous alteration of multiple amino acids in the peptide sequence.

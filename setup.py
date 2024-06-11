@@ -19,7 +19,6 @@ setup(
         'scikit-learn==0.24.2',
         'tqdm',
         'matplotlib',
-        'seaborn',
     ],
     classifiers=[
         'License :: OSI Approved :: MIT License',

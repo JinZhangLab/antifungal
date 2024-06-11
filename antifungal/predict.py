@@ -167,9 +167,9 @@ def predict_MIC(seq):
     dict: A dictionary containing predicted activities, probabilities, and the original peptide sequences.
     """
     des = calc_descriptor(seq)
-    peptide = calc_activity(des)
-    peptide['peptide_seq'] = seq
-    return peptide
+    activities = calc_activity(des)
+    activities['peptide_seq'] = seq
+    return activities
 
 
 if __name__ == "__main__":
