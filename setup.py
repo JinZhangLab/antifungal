@@ -7,7 +7,7 @@ setup(
     include_package_data=True, 
     author='Jin Zhang',
     author_email='jzhang@chemoinfolab.com',
-    description='A python package for activity prediction and in rational design of antifungal peitdes.',
+    description='A python package for activity prediction and rational design of antifungal peitdes.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/JinZhangLab/antifungal',
